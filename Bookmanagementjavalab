@@ -1,0 +1,170 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package labquestins;
+
+import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+
+/**
+ *
+ * @author Hp
+ */
+
+class Create {
+    String name;
+    String cat;
+    String mathbooks[]= new String[3];
+    String csbooks[]= new String[3];
+    String statbooks[]= new String[3];
+    Scanner sc = new Scanner(System.in);
+    void getdata(){
+        System.out.println("Enter your name:");
+        name=sc.next();
+        System.out.println("Enter the category:");
+        cat = sc.next();
+        System.out.println("Enter 3 maths books:");
+        for(int i =0;i<3;i++)
+            mathbooks[i]=sc.next();
+        System.out.println("Enter 3 CS books:");
+        for(int i =0;i<3;i++)
+            csbooks[i]=sc.next();
+        System.out.println("Enter 3 stat books:");
+        for(int i =0;i<3;i++)
+            statbooks[i]=sc.next();  
+    }
+}
+class Search extends Create{
+    public String bookname;
+    void displaybooks(){
+        System.out.println("The available books in your category are:");
+        if("CS".equals(cat)){
+            for(int i =0;i<3;i++){
+                System.out.println(csbooks[i]);
+            }
+               
+        }
+        else if("Maths".equals(cat)){
+            for(int i =0;i<3;i++){
+                System.out.println(mathbooks[i]);
+        }
+    }
+        else if("Statistics".equals(cat)){
+            for(int i =0;i<3;i++){
+                System.out.println(statbooks[i]);
+        }
+    }
+        
+}
+    void booksearch(){
+        System.out.println("Enter the book to search:");
+        bookname = sc.next();
+        if("CS".equals(cat)){
+            for(int i =0;i<3;i++){
+                if(bookname.equals(csbooks[i])){
+                    System.out.println("The book is available");
+                }  
+            }
+        }
+        else if("Maths".equals(cat)){
+            for(int i =0;i<3;i++){
+                if(bookname.equals(mathbooks[i])){
+                    System.out.println("The book is available");
+                } 
+            }
+        }
+        else if("Statistics".equals(cat)){
+            for(int i =0;i<3;i++){
+                if(bookname.equals(statbooks[i])){
+                    System.out.println("The book is available");
+                }
+                
+            }
+        }
+        
+    }
+    void remdisp(){
+        System.out.println("The remaining books in your category are:");
+        if("CS".equals(cat)){
+            for(int i =0;i<3;i++){
+                if(bookname.equals(csbooks[i])){
+                    
+                }
+                else{
+                System.out.println(csbooks[i]);}
+            }              
+        }
+        else if("Maths".equals(cat)){
+            for(int i =0;i<3;i++){
+                 if(bookname.equals(mathbooks[i])){
+                    
+                }
+                else{
+                System.out.println(mathbooks[i]);
+        }
+    }}
+        else if("Statistics".equals(cat)){
+            for(int i =0;i<3;i++){
+                 if(bookname.equals(statbooks[i])){
+                    
+                }
+                else{
+                System.out.println(statbooks[i]);
+        }
+    }
+    }
+}
+}
+
+class Issue extends Create{
+    String yesno;
+    void issuedet(){
+        System.out.println("Do you want to take this book ? yes/no");
+        yesno=sc.next();
+        if("yes".equals(yesno))
+            System.out.println("The book is issued successfully");
+        else
+            System.out.println("Thanks for using the library !");  
+    }
+    
+}
+
+public class JavaLabQuestion {
+    public static void main(String[] args) {
+        Search obj1 = new Search();
+        obj1.getdata();
+        obj1.displaybooks();
+        obj1.booksearch();
+        Issue obj2 = new Issue();
+        obj2.issuedet();
+        obj1.remdisp();
+        try{
+            if("yes".equals(obj2.yesno)){
+                FileWriter obj = new FileWriter("details.txt");
+                obj.write(obj1.bookname+" is issued to "+obj1.name);
+                obj.close();
+            }
+        }
+        catch(IOException e){
+            
+        }
+        try{
+            File object = new File("details.txt");
+            Scanner sca = new Scanner(object);
+            while(sca.hasNextLine())
+                System.out.println(sca.nextLine());
+            sca.close();
+        }
+        catch(FileNotFoundException e){
+            
+        }
+        catch(IOException e){
+            
+        }
+    }
+    
+}
