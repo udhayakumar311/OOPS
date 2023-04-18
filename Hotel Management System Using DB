@@ -1,0 +1,91 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package hotel.management.system.using.database;
+import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+/**
+ *
+ * @author Hp
+ */
+class Details{
+   String month;
+   int duration;
+   Scanner sc = new Scanner(System.in);
+   void getdetails(){
+       System.out.println("Enter the month you wanna book hotel :");
+       month=sc.next();
+       System.out.println("Enter the duration of stay in days :");
+       duration=sc.nextInt();
+   }
+}
+class Roomtype extends Details{
+    String roomtype;
+    int rateperday;
+    void roomdisp(){
+        System.out.println("The types of rooms available and their rates are shown below:");
+        System.out.println("Regular - Rs.3000/day \nDeluxe - Rs.5000/day \nCottage - Rs.6000 \nFamily - Rs.4000");
+    }
+    void roomselect(){
+        System.out.println("Enter your room preference :");
+        roomtype=sc.next();
+        if("Regular".equals(roomtype))
+            rateperday=3000;
+        else if("Deluxe".equals(roomtype))
+            rateperday=5000;
+        else if("Cottage".equals(roomtype))
+            rateperday=6000;
+        if("Family".equals(roomtype))
+            rateperday=4000;
+    }
+}
+class Charges extends Roomtype{
+    double totalcharge;
+    String yesno;
+    void finalcost(){
+        totalcharge=duration*rateperday;
+        if("April".equals(month)||"May".equals(month)||"June".equals(month)||"October".equals(month)||"November".equals(month))
+            totalcharge=totalcharge+((15*totalcharge)/100);
+        System.out.println("The total cost of the stay will be Rs."+totalcharge);
+    }
+    void confirmation(){
+        System.out.println("Confirm the booking ? ok/no");
+        yesno=sc.next();
+        if("ok".equals(yesno))
+            System.out.println("Your booking is confirmed");
+        else
+            System.out.println("Booking is cancelled");
+    }
+}
+public class HotelManagementSystemUsingDatabase {
+    public static void main(String[] args) {
+        Charges obj1 = new Charges();
+        obj1.getdetails();
+        obj1.roomdisp();
+        obj1.roomselect();
+        obj1.finalcost();
+        obj1.confirmation();
+        if("ok".equals(obj1.yesno)){
+            try{
+                Class.forName("org.apache.derby.jdbc.ClientDriver");
+                Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/Hotel Booking","root","root");
+                PreparedStatement ps = con.prepareStatement("insert into DETAILS(MONTH,DURATION,ROOMTYPE,COST)values(?,?,?,?)");
+                ps.setString(1, obj1.month);
+                ps.setInt(2, obj1.duration);
+                ps.setString(3, obj1.roomtype);
+                ps.setDouble(4, obj1.totalcharge);
+                ps.executeUpdate();
+            }
+            catch(Exception e){
+                
+            }
+            
+        }
+        
+    }
+    
+}
