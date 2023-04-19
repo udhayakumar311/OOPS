@@ -1,0 +1,54 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package runnable.pkginterface;
+
+/**
+ *
+ * @author Hp
+ */
+class A implements Runnable{
+    public void run(){
+        for(int i=0;i<5;i++)
+            System.out.println("Thread A");
+        System.out.println("Exit Thread A");
+        
+    }
+}
+class B implements Runnable{
+    public void run(){
+        for(int i=0;i<5;i++)
+            System.out.println("Thread B");
+        System.out.println("Exit Thread B");
+        
+    }
+}
+class C implements Runnable{
+    public void run(){
+        for(int i=0;i<5;i++)
+            System.out.println("Thread C");
+        System.out.println("Exit Thread C");
+        
+    }
+}
+
+
+public class RunnableInterface {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        A obj1 = new A();
+        B obj2 = new B();
+        C obj3 = new C();
+        Thread thr1 = new Thread(obj1);
+        Thread thr2 = new Thread(obj2);
+        Thread thr3 = new Thread(obj3);
+        thr1.start();
+        thr2.start();
+        thr3.start();
+    }
+    
+}
