@@ -1,0 +1,42 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package javaapplication97;
+
+/**
+ *
+ * @author Hp
+ */
+
+interface B{
+    static final int x=2;
+    void disp();
+}
+
+class C{
+    int age=20;
+    void display(){
+        System.out.println("Age is "+age);
+    }
+}
+public class JavaApplication97 extends C implements B{
+
+    /**
+     * @param args the command line arguments
+     */
+    public void disp(){
+        System.out.println("X value is "+x);
+    }
+    public static void main(String[] args) {
+        
+        JavaApplication97 obj = new JavaApplication97();
+        obj.disp();
+        obj.display();
+        String arr1[]= new String[]{"OS","DBMS","OOPS"};
+        for(int i=0;i<arr1.length;i++){
+            System.out.println(arr1[i]);
+        }
+        System.out.println(Integer.parseInt("121"));
+    }
+}
