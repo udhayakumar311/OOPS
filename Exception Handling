@@ -1,0 +1,58 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package lab.exceptions;
+import java.io.*;
+import java.util.Scanner;
+/**
+ *
+ * @author Hp
+ */
+public class LabExceptions {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+    //1.File Not Found Exception (Checked)
+    try{
+         FileReader obj1 = new FileReader("name.txt");
+    }
+    catch(FileNotFoundException e){
+        System.out.println("1  "+e);
+    }
+    //2.Class Not Found Exception (Checked)
+    try{
+          Class.forName("A");
+        }
+        catch(ClassNotFoundException e){
+            System.out.println("2  "+e);
+        }
+   
+    //3.Null Pointer Exception (Unchecked)
+    try{
+    String s = null;
+    System.out.println(s.length());
+    }
+    catch(NullPointerException e){
+        System.out.println("3  "+e);
+    }
+    //4.Number Format Exception (Unchecked)
+    try{
+        String num = "computer";
+        int n = Integer.parseInt(num);
+    }
+    catch(NumberFormatException e){
+        System.out.println("4  "+e);
+    }
+    //5.Array Index Out of Bound Exception (Unchecked)
+    try{
+        int arr[] = new int[3];
+        System.out.println(arr[4]);
+    }
+    catch(ArrayIndexOutOfBoundsException e){
+        System.out.println("5  "+e);
+    }    
+}
+}
