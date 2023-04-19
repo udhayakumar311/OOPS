@@ -1,0 +1,107 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package management.testing;
+
+import java.util.Scanner;
+import java.io.*;
+
+/**
+ *
+ * @author Hp
+ */
+//class1
+class Details{
+   String month;
+   int duration;
+   Scanner sc = new Scanner(System.in);
+   void getdetails(){
+       System.out.println("Enter the month you wanna book hotel :");
+       month=sc.next();
+       System.out.println("Enter the duration of stay in days :");
+       duration=sc.nextInt();
+   }
+}
+
+
+//class2
+class Roomtype {
+    Details d = new Details();
+    Scanner sc = new Scanner(System.in);
+    String roomtype;
+    int rateperday;
+    void roomdisp(){
+        System.out.println("The types of rooms available and their rates are shown below:");
+        System.out.println("Regular - Rs.3000/day \nDeluxe - Rs.5000/day \nCottage - Rs.6000 \nFamily - Rs.4000");
+    }
+    void roomselect(){
+        System.out.println("Enter your room preference :");
+        roomtype=sc.next();
+        if("Regular".equals(roomtype))
+            rateperday=3000;
+        else if("Deluxe".equals(roomtype))
+            rateperday=5000;
+        else if("Cottage".equals(roomtype))
+            rateperday=6000;
+        if("Family".equals(roomtype))
+            rateperday=4000;
+    }
+}
+
+//class3
+class Charges {
+    Scanner sc = new Scanner(System.in);
+    Roomtype r = new Roomtype();
+    double totalcharge;
+    String yesno;
+    void finalcost(){
+        totalcharge=r.d.duration*r.rateperday;
+        if("April".equals(r.d.month)||"May".equals(r.d.month)||"June".equals(r.d.month)||"October".equals(r.d.month)||"November".equals(r.d.month))
+            totalcharge=totalcharge+((15*totalcharge)/100);
+        System.out.println("The total cost of the stay will be Rs."+totalcharge);
+    }
+    void confirmation(){
+        System.out.println("Confirm the booking ? ok/no");
+        yesno=sc.next();
+        if("ok".equals(yesno))
+            System.out.println("Your booking is confirmed");
+        else
+            System.out.println("Booking is cancelled");
+    }
+}
+public class ManagementTesting {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Charges obj1 = new Charges();
+        obj1.r.d.getdetails();
+        obj1.r.roomdisp();
+        obj1.r.roomselect();
+        obj1.finalcost();
+        obj1.confirmation();
+        try{
+            FileWriter fw = new FileWriter("det.txt");
+            fw.write("Room booked in the month "+obj1.r.d.month);
+            System.out.println("Details saved successfully");
+            fw.close();
+        }
+        catch(IOException e){
+            System.out.println("Exception Handled");
+        }
+        try{
+            File r = new File("det.txt");
+            Scanner sr = new Scanner(r);
+            while(sr.hasNextLine()){
+                System.out.println(sr.nextLine());
+            }
+            sr.close();
+        }
+        catch(FileNotFoundException e){
+            
+        }
+    }    
+}
