@@ -1,0 +1,52 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package library.information.system;
+import java.util.*;
+
+/**
+ *
+ * @author Hp
+ */
+class librarydet{
+    Scanner s = new Scanner(System.in);
+    final int MAX=5;
+    String name,yesno;
+    int regno,books;
+    librarydet(String n,int r){
+        name=n;
+        regno=r;
+        System.out.println("Name : "+name);
+        System.out.println("Reg.No : "+regno);
+    }
+    void bookdata(){
+        System.out.println("Do you want to take books ? y/n");
+        yesno = s.nextLine();
+        if ("y".equals(yesno)){
+            System.out.println("One student can take maximum of 5 books");
+            System.out.println("How many books have you already taken ?");
+            books=s.nextInt();
+            System.out.println("So,you can still take "+(MAX-books)+" books!");
+        }  
+    }
+     void returntime(){
+         System.out.println("Return period for each book is 30 days !");
+         Calendar c = Calendar.getInstance();
+         System.out.println("Today's date is :"+c.getTime());
+         c.add(Calendar.DATE, 30);
+         System.out.println("Return date is  :"+c.getTime());
+    }
+ }
+
+public class LibraryInformationSystem {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+      librarydet s1 = new librarydet("Udhaya",121);
+      s1.bookdata();
+      s1.returntime();
+    }  
+}
