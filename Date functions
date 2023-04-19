@@ -1,0 +1,43 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class Main {
+  public static void main(String[] args) {
+    // Get the current date
+    LocalDate currentDate = LocalDate.now();
+
+    // Add 30 days to the current date
+    LocalDate futureDate = currentDate.plusDays(30);
+
+    // Create another date
+    LocalDate anotherDate = LocalDate.of(2023, 5, 20);
+
+    // Compare the dates
+    int compareFuture = futureDate.compareTo(anotherDate);
+
+    // Format the dates
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    String formattedCurrentDate = currentDate.format(formatter);
+    String formattedFutureDate = futureDate.format(formatter);
+    String formattedAnotherDate = anotherDate.format(formatter);
+
+    // Print the dates and the comparison result
+    System.out.println("Current date: " + formattedCurrentDate);
+    System.out.println("Future date: " + formattedFutureDate);
+    System.out.println("Another date: " + formattedAnotherDate);
+    if (compareFuture < 0) {
+      System.out.println("Another date is after the future date");
+    } else if (compareFuture > 0) {
+      System.out.println("Another date is before the future date");
+    } else {
+      System.out.println("Another date is the same as the future date");
+    }
+  }
+}
+
+
+OUTPUT:
+Current date: 19/04/2023
+Future date: 19/05/2023
+Another date: 20/05/2023
+Another date is after the future date
